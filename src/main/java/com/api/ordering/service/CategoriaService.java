@@ -2,6 +2,7 @@ package com.api.ordering.service;
 
 import com.api.ordering.model.Categoria;
 import com.api.ordering.repository.CategoriaRepository;
+import com.api.ordering.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class CategoriaService {
     public Categoria buscarPorId(Integer id){
         Optional<Categoria> categoria = repository.findById(id);
 
-        return categoria.orElse(null);
+        return categoria.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 }
