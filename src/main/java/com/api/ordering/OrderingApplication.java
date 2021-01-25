@@ -1,13 +1,8 @@
 package com.api.ordering;
 
-import com.api.ordering.model.Categoria;
-import com.api.ordering.model.Cidade;
-import com.api.ordering.model.Estado;
-import com.api.ordering.model.Produto;
-import com.api.ordering.repository.CategoriaRepository;
-import com.api.ordering.repository.CidadeRepository;
-import com.api.ordering.repository.EstadoRepository;
-import com.api.ordering.repository.ProdutoRepository;
+import com.api.ordering.model.*;
+import com.api.ordering.model.enums.TipoCliente;
+import com.api.ordering.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +24,12 @@ public class OrderingApplication implements CommandLineRunner {
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderingApplication.class, args);
@@ -66,5 +67,17 @@ public class OrderingApplication implements CommandLineRunner {
 
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+		Cliente cli1 = new Cliente(null, "Maria", "maria@gmail.com", "1234", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("1234", "123456"));
+
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "1234565", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "12345650", cli1, c2);
+
+		cli1.getEnderecos().addAll(Arrays.asList(e1));
+
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+
 	}
 }
