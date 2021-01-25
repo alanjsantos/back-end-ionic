@@ -1,13 +1,30 @@
 package com.api.ordering;
 
+import com.api.ordering.model.Categoria;
+import com.api.ordering.repository.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
+
 @SpringBootApplication
-public class OrderingApplication {
+public class OrderingApplication implements CommandLineRunner {
+
+	@Autowired
+	private CategoriaRepository repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderingApplication.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+		Categoria cat1 = new Categoria(null, "Informática");
+		Categoria cat2 = new Categoria(null, "Escritório");
+
+		//criando uam lista automatica.
+		repository.saveAll(Arrays.asList(cat1, cat2));
+	}
 }
