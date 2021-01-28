@@ -16,7 +16,6 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
-    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId //em um mapemaento de um para um, as vezes é necessário colocar a anotação MasId para que a classe pai e filha tenham um mesmo ID.
