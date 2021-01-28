@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("categorias")
@@ -22,9 +25,9 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria){
-        Categoria cat = service.salvar(categoria);
+    public ResponseEntity<?> salvar(@RequestBody Categoria categoria){
+        categoria = service.salvar(categoria);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(cat);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoria);
     }
 }

@@ -27,16 +27,9 @@ public class CategoriaService {
         return categoria.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
-    @Transactional
+
     public Categoria salvar(Categoria categoria) {
-        Categoria cat = new Categoria(null, categoria.getNome());
 
-        for (Produto p : categoria.getProdutos()) {
-            Produto produto = produtoRepository.getOne(p.getId());
-            cat.getProdutos().add(produto);
-        }
-        cat = categoriaRepository.save(cat);
-
-        return cat;
+        return categoriaRepository.save(categoria);
     }
 }
