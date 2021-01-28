@@ -14,7 +14,7 @@ public class CategoriaController {
     @Autowired
     private CategoriaService service;
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
         Categoria categoria = service.buscarPorId(id);
 
