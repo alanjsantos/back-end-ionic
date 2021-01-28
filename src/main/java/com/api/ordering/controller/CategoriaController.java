@@ -15,26 +15,33 @@ import java.net.URI;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaService cargoservice;
+    private CategoriaService categoriaservice;
 
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> findId(@PathVariable Integer id) {
-        Categoria categoria = cargoservice.findId(id);
+        Categoria categoria = categoriaservice.findId(id);
 
         return ResponseEntity.ok().body(categoria);
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Categoria categoria){
-        categoria = cargoservice.save(categoria);
+    public ResponseEntity<Categoria> save(@RequestBody Categoria categoria){
+        categoria = categoriaservice.save(categoria);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(categoria);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Categoria categoria, @PathVariable Integer id){
+    public ResponseEntity<Categoria> update(@RequestBody Categoria categoria, @PathVariable Integer id){
         categoria.setId(id);
-        categoria = cargoservice.update(categoria);
+        categoria = categoriaservice.update(categoria);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Categoria> delete(@PathVariable Integer id){
+        categoriaservice.delete(id);
 
         return ResponseEntity.noContent().build();
     }

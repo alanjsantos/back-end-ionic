@@ -6,6 +6,7 @@ import com.api.ordering.repository.CategoriaRepository;
 import com.api.ordering.repository.ProdutoRepository;
 import com.api.ordering.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,18 @@ public class CategoriaService {
         findId(categoria.getId());
 
         return categoriaRepository.save(categoria);
+
+    }
+
+    public void delete(Integer id){
+        findId(id);
+        try {
+            categoriaRepository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw  new com.api.ordering.service.exception.DataIntegrityViolationException("" +
+                    "Não é possível exlcuir uma garotia que possui Produto.");
+        }
 
     }
 
