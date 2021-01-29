@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +23,11 @@ public class CategoriaService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    public List<Categoria> findAll (){
+
+        return categoriaRepository.findAll();
+    }
 
     public Categoria findId(Integer id) {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
