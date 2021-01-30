@@ -7,6 +7,9 @@ import com.api.ordering.repository.ProdutoRepository;
 import com.api.ordering.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.stylesheets.LinkStyle;
@@ -58,6 +61,20 @@ public class CategoriaService {
                     "Não é possível exlcuir uma garotia que possui Produto.");
         }
 
+    }
+
+    //Listagem com Paginação
+        /*
+           Parametros da Classe Page:
+           1. Qual a pagina que eu quero? - Integer page (pagina 1, pagina 2, etc)
+           2. Quantas linhas poçr pagina? - Integer linesPerPage
+           3. Qual a atributo irei ordernar? - String orderBy (Por ID, por NOME, etc)
+           4. Qual a direção eu vou ordenar?  direction (Se e´descendente ou ascendente)
+         */
+    public Page<Categoria> findPage (Integer page, Integer linesPerPage, String orderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+
+        return categoriaRepository.findAll(pageRequest);
     }
 
 }
