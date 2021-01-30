@@ -59,7 +59,7 @@ public class CategoriaService {
         }
         catch (DataIntegrityViolationException e){
             throw  new com.api.ordering.service.exception.DataIntegrityViolationException("" +
-                    "Não é possível exlcuir uma garotia que possui Produto.");
+                    "Não é possível exlcuir uma Categoria que possui Produto.");
         }
 
     }
