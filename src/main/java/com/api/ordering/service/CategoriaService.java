@@ -1,5 +1,6 @@
 package com.api.ordering.service;
 
+import com.api.ordering.dto.CategoriaDTO;
 import com.api.ordering.model.Categoria;
 import com.api.ordering.model.Produto;
 import com.api.ordering.repository.CategoriaRepository;
@@ -75,6 +76,11 @@ public class CategoriaService {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    //Convertendo entidade para DTO.
+    public Categoria fromDTO(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 
 }
