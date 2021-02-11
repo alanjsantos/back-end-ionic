@@ -24,6 +24,7 @@ public class ClienteDTO implements Serializable {
 
     }
 
+    //Convertendo entidade para DTO
     public ClienteDTO (Cliente cliente){
         id = cliente.getId();
         nome = cliente.getNome();

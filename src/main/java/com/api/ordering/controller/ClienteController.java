@@ -20,6 +20,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    //Buscando uma lista de cliente
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll(){
         List<Cliente> list = clienteService.findAll();
@@ -32,13 +33,14 @@ public class ClienteController {
         return ResponseEntity.ok().body(listDto);
     }
 
+    //Buscando cliente por ID
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> findId(@PathVariable Integer id){
         Cliente cliente = clienteService.findId(id);
 
         return ResponseEntity.ok().body(cliente);
     }
-
+    //Atualizando cliente
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){
         Cliente cliente = clienteService.fromDTO(clienteDTO);
@@ -48,6 +50,7 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
+    //Deletando cliente
     @DeleteMapping("/{id}")
     public ResponseEntity<Cliente> delete(@PathVariable Integer id){
         clienteService.delete(id);

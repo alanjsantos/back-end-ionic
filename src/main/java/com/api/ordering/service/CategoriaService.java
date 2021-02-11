@@ -2,6 +2,7 @@ package com.api.ordering.service;
 
 import com.api.ordering.dto.CategoriaDTO;
 import com.api.ordering.model.Categoria;
+import com.api.ordering.model.Cliente;
 import com.api.ordering.model.Produto;
 import com.api.ordering.repository.CategoriaRepository;
 import com.api.ordering.repository.ProdutoRepository;
@@ -46,9 +47,10 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria){
-        findId(categoria.getId());
+        Categoria newCategoria = findId(categoria.getId());
+        updateData(newCategoria, categoria);
 
-        return categoriaRepository.save(categoria);
+        return categoriaRepository.save(newCategoria);
 
     }
 
@@ -81,6 +83,11 @@ public class CategoriaService {
     //Convertendo entidade para DTO.
     public Categoria fromDTO(CategoriaDTO categoriaDTO){
         return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+    }
+
+    //Atualizando o campo nome, quando o metodo update for acionado.
+    private void updateData (Categoria newCategoria, Categoria categoria){
+        newCategoria.setNome(categoria.getNome());
     }
 
 }
