@@ -26,9 +26,6 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private ProdutoRepository produtoRepository;
-
     public List<Categoria> findAll (){
 
         return categoriaRepository.findAll();

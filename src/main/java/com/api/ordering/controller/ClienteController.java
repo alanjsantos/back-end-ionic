@@ -1,11 +1,15 @@
 package com.api.ordering.controller;
 
+import com.api.ordering.dto.CategoriaDTO;
 import com.api.ordering.dto.ClienteDTO;
+import com.api.ordering.dto.ClienteNewDTO;
+import com.api.ordering.model.Categoria;
 import com.api.ordering.model.Cliente;
 import com.api.ordering.service.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +44,16 @@ public class ClienteController {
 
         return ResponseEntity.ok().body(cliente);
     }
+
+    //Salvando Cliente (com relacionamentos)
+    @PostMapping
+    public ResponseEntity<Cliente> save(@Valid @RequestBody ClienteNewDTO clienteNewDTO){
+        Cliente cliente = clienteService.ClienteNewDTOFromDTO(clienteNewDTO);
+        cliente = clienteService.save(cliente);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
+    }
+
     //Atualizando cliente
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){
