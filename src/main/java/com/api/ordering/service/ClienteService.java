@@ -42,7 +42,7 @@ public class ClienteService {
         Optional<Cliente> cliente = clienteRepository.findById(id);
 
         return cliente.orElseThrow(() -> new ObjectNotFoundException(
-                "O Objeto não foi encontrado. " + id + "Tipo: " + Cliente.class.getName()
+                "O Objeto não foi encontrado. " + id + " Tipo: " + Cliente.class.getName()
         ));
     }
     @Transactional
