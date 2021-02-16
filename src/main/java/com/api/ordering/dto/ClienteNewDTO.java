@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class ClienteNewDTO implements Serializable {
     private static final long serialVersionUID = -3163159533044790892L;
 
-
+    //Classe Cliente
     @NotEmpty(message = "O nome é obrigátorio")
     @Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres.")
     private String nome;
@@ -24,6 +24,7 @@ public class ClienteNewDTO implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    //Classe Endereco
     @NotEmpty(message = "Preenchimento obrigatório.")
     private String logradouro;
 
@@ -36,11 +37,14 @@ public class ClienteNewDTO implements Serializable {
     @NotEmpty(message = "Preenchimento obrigatório.")
     private String cep;
 
+    //Classe Telefone
    // @NotEmpty(message = "Preenchimento obrigatório.")
     private String telefone1;
 
     private String telefone2;
     private String telefone3;
+
+    //Classe cidade
     private Integer cidadeId;
 
     public ClienteNewDTO (){

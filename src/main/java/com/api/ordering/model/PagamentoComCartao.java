@@ -1,11 +1,14 @@
 package com.api.ordering.model;
 
 import com.api.ordering.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 
 import javax.persistence.Entity;
 
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento{
     private static final long serialVersionUID = 2097261343722473743L;
 
